@@ -10,6 +10,13 @@ async function getLatestHousings(size){
     .lean();
 }
 
+async function getAllHousings(){
+        return Housing.find({}).lean();
+
+        
+}
+
 module.exports = {
-    getLatestHousings
+    getLatestHousings,
+    getAllHousings
 }

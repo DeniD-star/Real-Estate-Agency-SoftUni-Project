@@ -3,8 +3,12 @@
             <section id="all-listings">
                 <h1>Apartments for recents</h1>
                 <!-- If there are offers for housing in the database display each of them -->
-
-                <div class="card">
+                    {{#if housings}}
+                    {{#each housings}}
+                    {{> catalog-card}}
+                    {{/each}}
+                    {{else}}
+                {{!-- <div class="card">
                     <h3>Real House Luxury Villa</h3>
                     <p>Spacious and grand villa, 3 bedroom, 2 bath.</p>
 
@@ -18,20 +22,14 @@
                     <div class="cta-container"><a href="#" class="det-link">Details</a></div>
                     <div class="card_circle"><img src="./static/images/house2.jpg"></div>
 
-                </div>
+                </div> --}}
 
-                <div class="card">
-                    <h3>Sunhouse C21</h3>
-                    <p>Spacious dining room, remodel kitchen and wonderful deeded walk-out deck. </p>
-                    <div class="cta-container"><a href="#" class="det-link">Details</a></div>
-                    <div class="card_circle"><img src="./static/images/apartments.jpg"></div>
-
-                </div>
+                
 
                 <!-- If there are still no offers for housing in the database display: -->
-                <!--<div class="no-data-listing">
+                <div class="no-data-listing">
                     <p class="no-offer">There are no housing offers found...</p>
-                </div>-->
-
+                </div>
+                {{/if}}
             </section>
        
