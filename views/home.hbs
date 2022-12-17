@@ -13,8 +13,11 @@
             <section id="top-houses">
                 <h1>Top Houses</h1>
                 <div class="houses">
-
-
+{{#if latestHousings}}
+{{#each latestHousings}}
+{{> home-card}}
+{{/each}}
+{{!-- 
                     <div class="card-home">
                         <h2>Real House Luxury Villa</h2>
                         <div class="cta-container"><a href="#" class="details-link">Details</a></div>
@@ -27,14 +30,15 @@
                         <div class="cta-container"><a href="#" class="details-link">Details</a></div>
                         <div class="card_image"><img src="./static/images/house2.jpg"></div>
 
-                    </div>
+                    </div> --}}
 
-                    
+                    {{else}}
 
                     <!-- If there are still no offers for housing in the database display: -->
-                    <!--<div class="no-data-container">
+                   <div class="no-data-container">
                         <p class="no-data">There are no housing offers found...</p>
-                    </div>-->
+                    </div>
+                    {{/if}}
                 </div>
             </section>
      

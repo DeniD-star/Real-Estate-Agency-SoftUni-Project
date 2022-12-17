@@ -38,14 +38,11 @@ module.exports =()=> (req, res, next)=>{
 
 async function register( name, username, password){
     const existingUsername = await userService.getUserByUsername(username);
-    const existingName = await userService.getUserByName(name);
-
+   
     if(existingUsername){
         throw new Error ('Username is taken!')
     }
-    if(existingName){
-        throw new Error ('Email is taken!')
-    }
+    
 
     //if is not existing we register him, 
     //1. we hash the password

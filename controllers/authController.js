@@ -8,7 +8,7 @@ router.get('/register', isGuest(), (req, res) => {
 })
 
 router.post('/register',
-body('name', 'Name is required!').matches(/^[\p{L} ,.'-]+$/u).withMessage('You must have first and last name!'),
+body('name', 'Name is required!').matches(/^[A-Z][a-z]+\s[A-Z][a-z]+$/).withMessage('You must have first and last name!'),
     body('username', 'Username is required!').isLength({ min: 5 }).withMessage('Username must be at least 5 characters long!'),
     body('password', 'Password is required!').isLength({ min: 4 }).withMessage('Password must be at least 4 characters long!'),
     body('rePass', 'Repeat password, please!').custom((value, { req }) => {
