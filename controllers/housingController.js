@@ -58,7 +58,7 @@ router.get('/details/:id', async (req, res) => {
         housing.isOwner = req.user && req.user._id == housing.owner;
         housing.userRentedHome = req.user && housing.rentedHome.find(x => x._id == req.user._id)
         housing.available = housing.availablePieces > 0;
-        housing.rentedUsers = housing.rentedHome.map(x=> x.name).join(', ')
+        housing.rentedUsers = housing.rentedHome.map(x => x.name).join(', ')
         res.render('details', { housing })
     } catch (err) {
         console.log(err.message);
@@ -73,9 +73,9 @@ router.get('/404', (req, res) => {
 })
 router.get('/edit/:id', isUser(), async (req, res) => {
     const housing = await req.storage.getHousingById(req.params.id);
-    res.render('edit', {housing})
+    res.render('edit', { housing })
 })
-router.post('/edit/:id', isUser(), async(req, res) => {
+router.post('/edit/:id', isUser(), async (req, res) => {
     try {
 
         const housing = await req.storage.getHousingById(req.params.id);
@@ -105,7 +105,7 @@ router.post('/edit/:id', isUser(), async(req, res) => {
     }
 })
 
-router.get('/delete/:id', isUser(), async(req, res)=>{
+router.get('/delete/:id', isUser(), async (req, res) => {
     try {
         const housing = await req.storage.getHousingById(req.params.id);
         if (housing.owner != req.user._id) {
@@ -119,7 +119,7 @@ router.get('/delete/:id', isUser(), async(req, res)=>{
         res.redirect('/housings/404')
     }
 })
-router.get('/rent/:id', isUser(), async(req, res)=>{
+router.get('/rent/:id', isUser(), async (req, res) => {
     try {
         const housing = await req.storage.getHousingById(req.params.id);
         if (housing.owner == req.user._id) {
@@ -131,6 +131,23 @@ router.get('/rent/:id', isUser(), async(req, res)=>{
     } catch (err) {
         console.log(err.message);
         res.redirect('/housings/404')
+    }
+})
+
+router.get('/search', async (req, res) => {
+
+    
+        res.render('search')
+  
+})
+router.post('/search', async (req, res) => {
+
+    try {
+        const matches = await req.storage.getAllHousings(req.body.search)
+        res.render('search', { matches })
+    } catch (err) {
+            console.log(err.message);
+            res.redirect('/housings/404')
     }
 })
 module.exports = router;

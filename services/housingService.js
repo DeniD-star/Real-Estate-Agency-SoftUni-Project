@@ -10,7 +10,14 @@ async function getLatestHousings(size){
     .lean();
 }
 
-async function getAllHousings(){
+async function getAllHousings(search){
+
+    if(search){
+        return Housing
+            .find({ type: { $regex: search, $options: 'i' } })
+            .lean();
+           
+    }
         return Housing.find({}).lean();
 
         
@@ -52,6 +59,8 @@ async function rentHousing(housingId, userId){
         return housing.save()
 
 }
+
+
 module.exports = {
     getLatestHousings,
     getAllHousings,
